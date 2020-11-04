@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" onchange="ImagetoBase64(this)">
+  <p id="output"></p>
+  <img src="" alt="" id="output-image" width="500">
+
+</body>
+<script>
+  function ImagetoBase64(image){
+    var img = image.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      console.log(reader.result);
+      // $("#output-image").attr("src",reader.result);
+      
+    };
+    reader.readAsDataURL(img);
+  }
+</script>
+</html>

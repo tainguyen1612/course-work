@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include meta tag to ensure proper rendering and touch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include jQuery Mobile stylesheets -->
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+    <!-- Include the jQuery library -->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Include the jQuery Mobile library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript" src="js/databaseHandler.js"></script>
+    <script type="text/javascript" src="js/productHandler.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="js/check.js"></script>
+    <title>Hello World</title>
+    <style>
+        h4,p{
+            width: 60%;
+            float: right;
+        }
+        span{
+            font-size: 12px;
+        }
+
+        .ui-listview>li h4{
+            margin: 3px;
+            font-size:14px;
+        }
+        .red{
+            color: red;
+            font-size: 8px;
+        }
+        #btnAdd{
+            width: 30%;
+            margin: auto;
+            background-color: royalblue;
+            color: #ffffff;
+            border-radius: 30px;
+        }
+        #btnAdd:hover{
+            background-color: springgreen;
+        } 
+        #imgae {
+        display: block;
+        margin-left: 22%;
+        margin-right: 0;
+        }
+        @media (max-width: 50em){
+            #image{
+                margin-left: 0;
+            }
+        }
+        
+    </style>
+    <script>
+        function reviewPicture(event){
+            
+            var imgBefore = new FileReader();
+            var img = document.getElementById("image");
+            
+            imgBefore.onload = function(){
+                if(imgBefore.readyState == 2){
+                    img.src = imgBefore.result; 
+                }
+            }
+            imgBefore.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+</head>
+<body>
+<div data-role="page" id="addpage">
+    <div data-role="panel" id="addPagePanel">
+        <h1>Menu</h1>
+        <ul data-role="listview" data-inset="true">
+            <li data-icon="plus"><a href="#addpage">Rating</a></li>
+            <li data-icon="grid"><a href="#loadpage">List</a></li>
+        </ul>
+    </div>
+    <div data-role="header" data-position="fixed">
+        <a href="#addPagePanel"
+            class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all ui-shadow"></a>
+        <h1>I-Rate</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <form id="form">
+            <div class="ui-field-contain">
+                <label for="txtName">Name  <span class="red"></span></label>
+                <input name="name" type="text" id="txtName" data-clear-btn="true" />
+                <br>
+                <label for="txtName">Picture</label>
+                <input type="file" id="file" onchange="reviewPicture(event)" style="display: block;">
+                <img src="image/10x-featured-social-media-image-size.png" width="200" height="100" id="image" alt="">
+                <br>
+                <label for="txtType">Restaurant type </label>
+                <!-- <input type="text" id="txtType" data-clear-btn="true"/> -->
+                <select name="select-custom1" id="select-custom-1" >
+                    <option value="1">Buffet Restaurant</option>
+                    <option value="2">Veg Restaurant</option>
+                    <option value="3">Non-veg Restaurant</option>
+                    <option value="4">Fast-food Restaurant</option>
+                    <option value="5">Seafood Restaurant</option>
+                </select>
+                <br>
+                <label for="datetime">Business hours</label>
+                <select name="select-custom-date" id="date-select" >
+                    <option value="1">8:00 am - 23:00 pm</option>
+                    <option value="2">6:00 am - 22:00 pm</option>
+                    <option value="3">7:00 am - 22:00 pm</option>
+                    <option value="4">7:00 am - 23:00 pm</option>
+                </select>
+                <br>
+                <label for="txtPrice">Average meal price <span class="red"></span></label>
+                <input name="price" type="text" id="txtPrice" data-clear-btn="true" />
+                
+                <label for="select-custom-1">Service rating</label>
+                <select name="select-custom-2" id="select-custom-2" class="fa">
+                    <option value="★">&#xf005; Not good at all</option>
+                    <option value="★ ★">&#xf005; &#xf005; Average</option>
+                    <option value="★ ★ ★">&#xf005; &#xf005; &#xf005; Pretty good</option>
+                    <option value="★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; Good</option>
+                    <option value="★ ★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; Excellent</option>
+                </select>
+                <label for="select-custom-2">Cleanliness rating</label>
+                <select name="select-custom-3" id="select-custom-3" class="fa">
+                    <option value="★">&#xf005; Not good at all</option>
+                    <option value="★ ★">&#xf005; &#xf005; Average</option>
+                    <option value="★ ★ ★">&#xf005; &#xf005; &#xf005; Pretty good</option>
+                    <option value="★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; Good</option>
+                    <option value="★ ★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; Excellent</option>
+                </select>
+                <label for="select-custom-3">Food quality rating</label>
+                <select name="select-custom-4" id="select-custom-4" class="fa">
+                    <option value="★">&#xf005; Not good at all</option>
+                    <option value="★ ★">&#xf005; &#xf005; Average</option>
+                    <option value="★ ★ ★">&#xf005; &#xf005; &#xf005; Pretty good</option>
+                    <option value="★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; Good</option>
+                    <option value="★ ★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; Excellent</option>
+                </select>
+                <br>
+                <label for="txtNote">Note</label>
+                <textarea name="note" type="text" id="txtNote" data-clear-btn="true" name="" cols="30" rows="10" ></textarea>
+                <br>
+                <label for="txtnameReport">Name Report <span class="red"></span></label>
+                <input name="nameReport" type="text" id="txtnameReport" data-clear-btn="true" />
+                
+                <br>
+                <label for="btnAdd"></label>
+                <!-- <a class="ui-btn ui-icon-plus ui-btn-icon-left" id="btnAdd" onclick="addProduct()">Add</a> -->
+                <button type="submit" name="submit" class="ui-btn ui-icon-plus ui-btn-icon-left" id="btnAdd" onclick="addProduct()"> Add </button>
+            </div>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1>RESTAURANT RATING</h1>
+    </div>
+</div>
+<div data-role="page" id="loadpage">
+    <div data-role="panel" id="loadPagePanel">
+        <h1>Menu</h1>
+        <ul data-role="listview" data-inset="true">
+            <li data-icon="plus"><a href="#addpage">Rating</a></li>
+            <li data-icon="grid"><a href="#loadpage">List</a></li>
+        </ul>
+    </div>
+    <div data-role="header" data-position="fixed">
+        <a href="#loadPagePanel"
+            class="ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all ui-shadow"></a>
+        <h1>List Restaurant</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <form class="ui-filterable">
+            <input data-type="search" id="txtKeyword"/>
+        </form>
+        <ul data-role="listview" data-filter="true" data-input="#txtKeyword" data-inset="true" id="lstProducts" >
+
+        </ul>
+        <div data-role="popup" id="detailinfor">
+            <div data-role="header">
+                <a class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" data-rel="back"></a>
+                <h1>Information</h1>
+            </div>
+            <div data-role="main" class="ui-content">
+                <a class="ui-btn ui-icon-edit ui-btn-icon-left ui-btn-inline" href="#updatedialog" >Detail</a>
+                <a class="ui-btn ui-icon-delete ui-btn-icon-left ui-btn-inline" onclick="deleteProduct()">Delete</a>
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h1>RESTAURANT RATING</h1>
+    </div>
+</div>
+<div data-role="dialog" id="updatedialog">
+    <div data-role="header">
+        <h1>Detail</h1>
+    </div>
+    <div data-role="main" class="ui-content">
+        <form>
+            <div class="ui-field-contain">
+                <label for="txtNewName">Name:</label>
+                <input type="text" id="txtNewName" data-clear-btn="true"/>
+                <label for="txtType">Restaurant type: </label>
+                <!-- <input type="text" id="txtType" data-clear-btn="true"/> -->
+                <select name="select-custom1-New" id="select-custom-1-New" class="fa">
+                    <option value="1">Buffet Restaurant</option>
+                    <option value="2">Veg Restaurant</option>
+                    <option value="3">Non-veg Restaurant</option>
+                    <option value="4">Fast-food Restaurant</option>
+                    <option value="5">Seafood Restaurant</option>
+                </select>
+                <label for="datetimeNew">business hours:</label>
+                <select name="select-custom-date-New" id="date-select-New" class="fa">
+                    <option value="1">8:00 am - 23:00 pm</option>
+                    <option value="2">6:00 am - 22:00 pm</option>
+                    <option value="3">7:00 am - 22:00 pm</option>
+                    <option value="4">7:00 am - 23:00 pm</option>
+                </select>
+                <label for="txtPriceNew">Average meal price:</label>
+                <input type="text" id="txtNewPrice" data-clear-btn="true"/>
+                <label for="txtNewNote">Note:</label>
+                <input type="text" id="txtNewNote" data-clear-btn="true"/>
+                <label for="txtNewnameReport">Name Report</label>
+                <input type="text" id="txtNewnameReport" data-clear-btn="true"/>
+                <div class="ui-field-contain">
+                    <label for="select-custom-1-New">Service rating:</label>
+                    <select name="select-custom-2-New" id="select-custom-2-New" class="fa">
+                        <option value="★">&#xf005; Not good at all</option>
+                        <option value="★ ★">&#xf005; &#xf005; Average</option>
+                        <option value="★ ★ ★">&#xf005; &#xf005; &#xf005; Pretty good</option>
+                        <option value="★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; Good</option>
+                        <option value="★ ★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; Excellent</option>
+                    </select>
+                </div>
+                <div class="ui-field-contain">
+                    <label for="select-custom-2-New">Cleanliness rating:</label>
+                    <select name="select-custom-3-New" id="select-custom-3-New" class="fa">
+                        <option value="★">&#xf005; Not good at all</option>
+                        <option value="★ ★">&#xf005; &#xf005; Average</option>
+                        <option value="★ ★ ★">&#xf005; &#xf005; &#xf005; Pretty good</option>
+                        <option value="★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; Good</option>
+                        <option value="★ ★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; Excellent</option>
+                    </select>
+                </div>
+                <div class="ui-field-contain">
+                    <label for="select-custom-3">Food quality rating:</label>
+                    <select name="select-custom-4-New" id="select-custom-4-New" class="fa">
+                        <option value="★">&#xf005; Not good at all</option>
+                        <option value="★ ★">&#xf005; &#xf005; Average</option>
+                        <option value="★ ★ ★">&#xf005; &#xf005; &#xf005; Pretty good</option>
+                        <option value="★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; Good</option>
+                        <option value="★ ★ ★ ★ ★">&#xf005; &#xf005; &#xf005; &#xf005; &#xf005; Excellent</option>
+                    </select>
+                </div>
+                <label for="btnUpdate"></label>
+                <a class="ui-btn ui-icon-plus ui-btn-icon-left"
+                    id="btnUpdate" onclick="updateProduct()">Update</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
